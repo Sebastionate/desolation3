@@ -1,0 +1,16 @@
+
+FACTION.name = "Enslaved Vortigaunt"
+FACTION.description = "A humanoid alien from Xen enslaved by the Combine."
+FACTION.color = Color(223,123,89, 255)
+FACTION.pay = 0
+FACTION.payTime = 1750
+FACTION.isDefault = false
+FACTION.models = {
+	"models/vortigaunt_slave.mdl"
+}
+
+function FACTION:GetDefaultName(client)
+	return "UU-BIOTIC." .. Schema:ZeroNumber(math.random(1, 999), 3), true
+end
+
+FACTION_VORT = FACTION.index

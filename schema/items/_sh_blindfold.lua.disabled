@@ -1,0 +1,248 @@
+ITEM.name = "Blindfold"
+ITEM.description = "A black head-wrap meant to blind someone."
+ITEM.model = "models/sal/halloween/headwrap2.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.outfitCategory = "face"
+
+ITEM.functions.Use = {
+    OnRun = function(itemTable)
+        local client = itemTable.player
+        local data = {}
+        data.start = client:GetShootPos()
+        data.endpos = data.start + client:GetAimVector() * 96
+        data.filter = client
+        local target = util.TraceLine(data).Entity
+
+        if (IsValid(target) and target:IsPlayer() and target:GetCharacter() and not target:GetNetVar("isBlindfolded", false)) then
+            itemTable.bBeingUsed = true
+            client:SetAction("Blindfolding target.", 5)
+
+            if (target:IsCombine()) then
+                Schema:AddCombineDisplayMessage("@cLosingContact", Color(255, 255, 255, 255))
+                Schema:AddCombineDisplayMessage("@cLostContact", Color(255, 0, 0, 255))
+            end
+
+            client:DoStaredAction(target, function()
+                target:SetNetVar("isBlindfolded", true)
+                target:Notify("You are now blindfolded.")
+                itemTable:Remove()
+            end, 5, function()
+                client:SetAction()
+                target:SetAction()
+                itemTable.bBeingUsed = false
+            end)
+
+            target:SetAction("You are being blindfolded.", 5)
+        else
+            itemTable.player:NotifyLocalized("plyNotValid")
+        end
+
+        return false
+    end,
+    OnCanRun = function(itemTable) return not IsValid(itemTable.entity) or itemTable.bBeingUsed end
+}
+
+local pacData = { --pac bullshit
+    [1] = {
+        ["children"] = {
+            [1] = {
+                ["children"] = {},
+                ["self"] = {
+                    ["Skin"] = 0,
+                    ["Invert"] = false,
+                    ["LightBlend"] = 1,
+                    ["CellShade"] = -0.1,
+                    ["OwnerName"] = "self",
+                    ["AimPartName"] = "",
+                    ["IgnoreZ"] = false,
+                    ["AimPartUID"] = "",
+                    ["Passes"] = 1,
+                    ["Name"] = "",
+                    ["NoTextureFiltering"] = false,
+                    ["DoubleFace"] = false,
+                    ["PositionOffset"] = Vector(0, 0, 0),
+                    ["IsDisturbing"] = false,
+                    ["Fullbright"] = false,
+                    ["EyeAngles"] = false,
+                    ["DrawOrder"] = 0,
+                    ["TintColor"] = Vector(0, 0, 0),
+                    ["UniqueID"] = "178914282",
+                    ["Translucent"] = false,
+                    ["LodOverride"] = -1,
+                    ["BlurSpacing"] = 0,
+                    ["Alpha"] = 1,
+                    ["Material"] = "",
+                    ["UseWeaponColor"] = false,
+                    ["UsePlayerColor"] = false,
+                    ["UseLegacyScale"] = false,
+                    ["Bone"] = "head",
+                    ["Color"] = Vector(29, 28, 28),
+                    ["Brightness"] = 1,
+                    ["BoneMerge"] = false,
+                    ["BlurLength"] = 0,
+                    ["Position"] = Vector(1.8066101074219, -3.3682250976563, 1.6866455078125),
+                    ["AngleOffset"] = Angle(0, 0, 0),
+                    ["AlternativeScaling"] = false,
+                    ["Hide"] = false,
+                    ["OwnerEntity"] = false,
+                    ["Scale"] = Vector(1, 1, 1),
+                    ["ClassName"] = "model",
+                    ["EditorExpand"] = false,
+                    ["Size"] = 0.225,
+                    ["ModelFallback"] = "",
+                    ["Angles"] = Angle(-25.431049346924, 68.836044311523, 12.14098739624),
+                    ["TextureFilter"] = 3,
+                    ["Model"] = "models/cloth.mdl",
+                    ["BlendMode"] = ""
+                }
+            },
+            [2] = {
+                ["children"] = {},
+                ["self"] = {
+                    ["Skin"] = 1,
+                    ["Invert"] = false,
+                    ["LightBlend"] = 1,
+                    ["CellShade"] = 0,
+                    ["OwnerName"] = "self",
+                    ["AimPartName"] = "",
+                    ["IgnoreZ"] = false,
+                    ["AimPartUID"] = "",
+                    ["Passes"] = 1,
+                    ["Name"] = "",
+                    ["NoTextureFiltering"] = false,
+                    ["DoubleFace"] = false,
+                    ["PositionOffset"] = Vector(0, 0, 0),
+                    ["IsDisturbing"] = false,
+                    ["Fullbright"] = false,
+                    ["EyeAngles"] = false,
+                    ["DrawOrder"] = 0,
+                    ["TintColor"] = Vector(0, 0, 0),
+                    ["UniqueID"] = "3137603003",
+                    ["Translucent"] = false,
+                    ["LodOverride"] = -1,
+                    ["BlurSpacing"] = 0,
+                    ["Alpha"] = 1,
+                    ["Material"] = "",
+                    ["UseWeaponColor"] = false,
+                    ["UsePlayerColor"] = false,
+                    ["UseLegacyScale"] = false,
+                    ["Bone"] = "head",
+                    ["Color"] = Vector(255, 255, 255),
+                    ["Brightness"] = 1,
+                    ["BoneMerge"] = false,
+                    ["BlurLength"] = 0,
+                    ["Position"] = Vector(2.8636779785156, -1.81640625, -0.0255126953125),
+                    ["AngleOffset"] = Angle(0, 0, 0),
+                    ["AlternativeScaling"] = false,
+                    ["Hide"] = false,
+                    ["OwnerEntity"] = false,
+                    ["Scale"] = Vector(0.69999998807907, 1, 0.57499998807907),
+                    ["ClassName"] = "model",
+                    ["EditorExpand"] = true,
+                    ["Size"] = 0.775,
+                    ["ModelFallback"] = "",
+                    ["Angles"] = Angle(-90, 45, 90),
+                    ["TextureFilter"] = 3,
+                    ["Model"] = "models/sal/halloween/headwrap2.mdl",
+                    ["BlendMode"] = ""
+                }
+            },
+            [3] = {
+                ["children"] = {},
+                ["self"] = {
+                    ["Skin"] = 1,
+                    ["Invert"] = false,
+                    ["LightBlend"] = 1,
+                    ["CellShade"] = 0,
+                    ["OwnerName"] = "self",
+                    ["AimPartName"] = "",
+                    ["IgnoreZ"] = false,
+                    ["AimPartUID"] = "",
+                    ["Passes"] = 1,
+                    ["Name"] = "",
+                    ["NoTextureFiltering"] = false,
+                    ["DoubleFace"] = false,
+                    ["PositionOffset"] = Vector(0, 0, 0),
+                    ["IsDisturbing"] = false,
+                    ["Fullbright"] = false,
+                    ["EyeAngles"] = false,
+                    ["DrawOrder"] = 0,
+                    ["TintColor"] = Vector(0, 0, 0),
+                    ["UniqueID"] = "709464002",
+                    ["Translucent"] = false,
+                    ["LodOverride"] = -1,
+                    ["BlurSpacing"] = 0,
+                    ["Alpha"] = 1,
+                    ["Material"] = "",
+                    ["UseWeaponColor"] = false,
+                    ["UsePlayerColor"] = false,
+                    ["UseLegacyScale"] = false,
+                    ["Bone"] = "head",
+                    ["Color"] = Vector(255, 255, 255),
+                    ["Brightness"] = 1,
+                    ["BoneMerge"] = false,
+                    ["BlurLength"] = 0,
+                    ["Position"] = Vector(0.82535552978516, -0.79443359375, 0.0166015625),
+                    ["AngleOffset"] = Angle(0, 0, 0),
+                    ["AlternativeScaling"] = false,
+                    ["Hide"] = false,
+                    ["OwnerEntity"] = false,
+                    ["Scale"] = Vector(1.1000000238419, 1.0499999523163, 1.0750000476837),
+                    ["ClassName"] = "model",
+                    ["EditorExpand"] = true,
+                    ["Size"] = 0.82499998807907,
+                    ["ModelFallback"] = "",
+                    ["Angles"] = Angle(0.00014343399379868, -76.424507141113, -90.000015258789),
+                    ["TextureFilter"] = 3,
+                    ["Model"] = "models/sal/halloween/headwrap2.mdl",
+                    ["BlendMode"] = ""
+                }
+            }
+        },
+        ["self"] = {
+            ["DrawOrder"] = 0,
+            ["UniqueID"] = "389482056",
+            ["AimPartUID"] = "",
+            ["Hide"] = false,
+            ["Duplicate"] = false,
+            ["ClassName"] = "group",
+            ["OwnerName"] = "self",
+            ["IsDisturbing"] = false,
+            ["Name"] = "my outfit",
+            ["EditorExpand"] = true
+        }
+    }
+}
+
+-- hook.Add("Think", "BlindfoldThink", function()
+--     if CLIENT then
+--         for _, v in ipairs(player.GetAll()) do
+--             if v:GetNetVar("isBlindfolded", false) == true then
+--                 if not isfunction(v.AttachPACPart) then
+--                     pac.SetupENT(v)
+--                 end
+
+--                 if not v.blindfoldPart and isfunction(v.AttachPACPart) then
+--                     v:AttachPACPart(pacData)
+--                     v.blindfoldPart = true
+--                 end
+--             else
+--                 if isfunction(v.RemovePACPart) then
+--                     v:RemovePACPart(pacData)
+--                     v.blindfoldPart = nil
+--                 end
+--             end
+--         end
+--     end
+-- end)
+
+
+-- hook.Add("RenderScreenspaceEffects", "blindfoldPaint", function()
+--     if LocalPlayer():GetNetVar("isBlindfolded", false) == true then
+--         surface.SetDrawColor(0, 0, 0, 255)
+--         surface.DrawRect(0, 0, ScrW(), ScrH())
+--     else
+--         surface.SetDrawColor(0, 0, 0, 0)
+--     end
+-- end)

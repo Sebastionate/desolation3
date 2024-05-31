@@ -1,0 +1,12 @@
+
+FACTION.name = "Vortigaunt"
+FACTION.description = "A humanoid alien from Xen."
+FACTION.color = Color(223,123,89, 255)
+FACTION.pay = 0
+FACTION.payTime = 1750
+FACTION.isDefault = false
+FACTION.models = {
+	"models/vortigaunt.mdl"
+}
+
+FACTION_FREEVORT = FACTION.index

@@ -1,0 +1,9 @@
+ITEM.name = "Stun-baton"
+ITEM.description = "A standard Civil Protection issued stun-baton."
+ITEM.model = "models/weapons/w_stunbaton.mdl"
+ITEM.class = "ix_stunstick"
+ITEM.weaponCategory = "melee"
+ITEM.classes = {}
+ITEM.price = 200
+ITEM.width = 1
+ITEM.height = 2
